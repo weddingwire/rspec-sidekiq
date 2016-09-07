@@ -1,4 +1,3 @@
-# encoding: utf-8
 require File.expand_path('../lib/rspec/sidekiq/version', __FILE__)
 
 Gem::Specification.new do |s|
@@ -12,11 +11,15 @@ Gem::Specification.new do |s|
   s.description = 'Simple testing of Sidekiq jobs via a collection of matchers and helpers'
   s.license     = 'MIT'
 
-  s.add_dependency 'rspec', '~> 3.0', '>= 3.0.0'
+  s.add_dependency 'rspec-core', '~> 3.0', '>= 3.0.0'
   s.add_dependency 'sidekiq', '>= 2.4.0'
 
-  s.add_development_dependency 'coveralls', '~> 0.7', '>= 0.7.0'
+  s.add_development_dependency 'rspec', '~> 3.0'
+  s.add_development_dependency 'coveralls', '~> 0.8', '>= 0.8.0'
   s.add_development_dependency 'fuubar', '~> 2.0', '>= 2.0.0'
+  s.add_development_dependency 'activejob', '~> 4.2', '>= 4.0.0'
+  s.add_development_dependency 'actionmailer', '~> 4.2', '>= 4.0.0'
+
 
   s.files = Dir['.gitattributes'] +
             Dir['.gitignore'] +

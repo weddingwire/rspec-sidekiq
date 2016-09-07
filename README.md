@@ -1,3 +1,5 @@
+**Welcome @wpolicarpo as a new maintainer for `rspec-sidekiq`!**
+
 # RSpec for Sidekiq
 
 [![RubyGems][gem_version_badge]][ruby_gems]
@@ -91,7 +93,7 @@ sidekiq_options retry: 5
 # test with...
 expect(AwesomeJob).to be_retryable true # or
 it { is_expected.to be_retryable true }
-# ...or alternatively specifiy the number of times it should be retried
+# ...or alternatively specify the number of times it should be retried
 expect(AwesomeJob).to be_retryable 5 # or
 it { is_expected.to be_retryable 5 }
 # ...or when it should not retry
@@ -125,12 +127,34 @@ expect(AwesomeJob).to be_unique
 it { is_expected.to be_unique }
 ```
 
+### be_expired_in
+*Describes when a job should expire*
+```ruby
+sidekiq_options expires_in: 1.hour
+# test with...
+it { is_expected.to be_expired_in 1.hour }
+it { is_expected.to_not be_expired_in 2.hours }
+```
+
 ### have_enqueued_job
 *Describes that there should be an enqueued job with the specified arguments*
 ```ruby
-Awesomejob.perform_async 'Awesome', true
+AwesomeJob.perform_async 'Awesome', true
 # test with...
 expect(AwesomeJob).to have_enqueued_job('Awesome', true)
+```
+
+#### Testing scheduled jobs
+*Use chainable matchers `#at` and `#in`*
+```ruby
+Awesomejob.perform_at 5.minutes.from_now, 'Awesome', true
+# test with...
+expect(AwesomeJob).to have_enqueued_job('Awesome', true).at(5.minutes.from_now)
+```
+```ruby
+Awesomejob.perform_in 5.minutes, 'Awesome', true
+# test with...
+expect(AwesomeJob).to have_enqueued_job('Awesome', true).in(5.minutes)
 ```
 
 ## Example matcher usage
@@ -141,6 +165,7 @@ describe AwesomeJob do
   it { is_expected.to be_processed_in :my_queue }
   it { is_expected.to be_retryable 5 }
   it { is_expected.to be_unique }
+  it { is_expected.to be_expired_in 1.hour }
 
   it 'enqueues another awesome job' do
     subject.perform
@@ -170,6 +195,10 @@ FooClass.within_sidekiq_retries_exhausted_block {
 
 ## Testing
 ```bundle exec rspec spec```
+
+## Maintainers
+* @wpolicarpo
+* @philostler
 
 ## Contribute
 Please do! If there's a feature missing that you'd love to see then get in on the action!

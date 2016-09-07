@@ -1,5 +1,24 @@
+3.0.0
+---
+* Rely on all of RSpec in development [packrat386#101]
+* Pass exception to within_sidekiq_retries_exhausted_block [packrat386#100]
+* Add support for testing scheduled jobs [wpolicarpo#81]
+* only depend on rspec-core [urkle#96]
+* Add support for Sidekiq Enterprise [Geesu#82]
+* Fix clash with rspec-rails [pavel-jurasek-bcgdv-com#95]
+
+2.2.0
+---
+* Fix typo in README file [bradhaydon#87]
+* Fix type in readme [graudeejs#80]
+* Matchers::HaveEnqueuedJob breaks on jobs with Hash arguments [erikogan#77]
+* have_enqueued_job fails if args includes a Hash bug [gPrado#74]
+
 2.1.0
 ---
+* ActiveJob support [tarzan#71]
+* adding be expired in matcher [bernabas#72]
+* Fixed testing failures with be_delayed matcher due to rename of `enqueued_at` to `created_at` in latest Sidekiq [philostler]
 * Add support for NullBatch#on and NullStatus#failures to the null batch objects. [PacerPRO#64]
 * Adding a save_backtrace matcher [webdestroya#61]
 * Add flag to skip Batch stubs [paulfri#69]
